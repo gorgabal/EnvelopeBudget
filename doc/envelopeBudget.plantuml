@@ -1,0 +1,46 @@
+@startuml
+
+class record{
+  int id
+  date date
+  int amount
+  account account
+  envelope category
+  String description
+  String benefit
+}
+
+class envelope{
+  int budgetted
+  int spend
+  int getBudget()
+  int setBudget()
+}
+
+class account {
+  int id
+  string name
+}
+
+class manager{
+  envelope[] budgets
+  account[] accounts
+
+  envelope[] getBudgets()
+  account[] getAccounts()
+  void addRecord(record, envelope, account)
+  void addRecord(record, account, account)
+  void addAccount(String, startValue)
+  void addEnvelope(String)
+  record[] getRecords(envelope)
+  record[] getRecords(envelope, date, date)
+  record[] getRecords(account)
+  record[] getRecords(account, date, date)
+
+}
+
+
+manager - envelope
+manager - record
+manager - account
+@enduml
