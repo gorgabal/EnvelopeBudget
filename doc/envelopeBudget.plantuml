@@ -1,115 +1,81 @@
 @startuml
+package dataManager{
 
-class record{
-  int id
-  date date
-  int amount
-  account account
-  envelope category
-  String description
-  String benefit
 
-  --
-  Describes a single transaction
+    class manager{
+    The manager seperates the storage of data from the rest of the program.
+    Also does calculation like, spend this month, to be budgetted, etc
+    storage outsourced to submanagers.
+    ----
+
+
+    ----
+    String[] getAccounts
+    int getAccountValue(String name);
+    int toBudget();
+    envelope[] getBudgets(int month)
+    record[] getRecordsFromAccounts(string filter, date date, date date)
+    record[] getRecordsFromAccounts(string filtere)
+    record[] getRecordsFromBudget(string name, date, date)
+    record[] getRecordsFromBudget(string name)
+    }
+
+    class record{
+      int id
+      date date
+      int amount
+      account account
+      envelope category
+      String description
+      String benefit
+
+      --
+      Describes a single transaction
+    }
+
+
+
+    class account {
+      int id
+      string name
+      string description
+      --
+      stores account information
+    }
+
+
+    class envelope{
+      String name
+      Date month
+      int budgetted
+      int spend
+      int getBudget()
+      int setBudget()
+      --
+      stores how much is budgetted
+      for a specific category in a certain month.
+    }
+    class SAVE{
+
+    --
+    read and write's data to disk
+    }
 }
-
-
-
-class account {
-  int id
-  string name
-  string description
-  --
-  stores account information
-}
-
-class manager{
-The manager seperates the storage of data from the rest of the program.
-Also does calculation like, spend this month, to be budgetted, etc
-storage outsourced to submanagers.
-----
-
-
-----
-String[] getAccounts
-int getAccountValue(String name);
-int toBudget();
-envelope[] getBudgets(int month)
-record[] getRecordsFromAccounts(string filter, date date, date date)
-record[] getRecordsFromAccounts(string filtere)
-record[] getRecordsFromBudget(string name, date, date)
-record[] getRecordsFromBudget(string name)
-
-}
-
-class accountManager{
-interface for managing accounts and records
---
---
-record[] getRecords()
-record[] getRecords(String)
-record[] getRecords(date, date)
-record[] getRecords(String, date, date)
-String[] getAccounts()
-
-}
-
-
-class budgetManager {
-interface for managing budgets
---
-monthBudget[];
---
-setBudget(int, date, String);
-createBudget(String);
-getBudget(date, String);
-}
-
-class monthBudget {
-int yearkeeps track of budgets for
-the period of one month.;
----
-int month;
----
-Envelope[] budgets;
-setBudget(int, String);
-createBudget(String);
-getBudget(String);
-}
-
-
-class envelope{
-  String name
-  int budgetted
-  int spend
-  int getBudget()
-  int setBudget()
-  --
-  stores how much is budgetted
-  for a specific category
-}
-
 
 
 class GUI{
 
---
-presents data to user
-}
+    --
+    presents data to user
+    implementation and design pending.
+    }
 
-class SAVE{
 
---
-read and write's data to disk
-}
 
 GUI -- manager
-SAVE -- manager
-manager -- budgetManager
-manager -- accountManager
-budgetManager -- monthBudget
-monthBudget -- envelope
-accountManager -- record
-accountManager -- account
-
+SAVE - manager
+manager -- account
+manager -- envelope
+manager -- record
 @enduml
+
