@@ -4,18 +4,14 @@ import org.apache.commons.lang.NotImplementedException;
 
 import javax.naming.directory.AttributeInUseException;
 import javax.xml.soap.Node;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 public class manager {
 
 
-    private Map<String, envelope> budgets; //mapping YYYYMM{BudgetName}
+    private Map<String, envelope> budgets = new HashMap<>(); //mapping YYYYMM{BudgetName}
     private Node accounts;
-    private ArrayList<String> budgetNames; //contains the names of all the budgets.
-
-
+    private ArrayList<String> budgetNames = new ArrayList<>(); //contains the names of all the budgets.
 
     /**
      * @param name Name of the account you want information on
@@ -61,8 +57,30 @@ public class manager {
      * @param month The month, from 1-12, for which you want budget information
      * @return An array of envelopes, containing this months budget information
      */
-    envelope[] getBudgets(int month) {
-        throw new NotImplementedException("Needs Implementation!");
+    ArrayList<envelope> getBudgets(int month, int year) {
+        ArrayList<envelope> result = new ArrayList<>();
+
+        Iterator<envelope> iter = budgets.values().iterator();
+        while (iter.hasNext()) {
+            envelope current = iter.next();
+            if (current.getMonth() == month && current.getYear() == year) {
+                result.add(current);
+            }
+        }
+
+        return result;
+    }
+
+    boolean setBudget(String name, Integer month, Integer year, int money) {
+        String lookupKey = year.toString() + month.toString() + name;
+        envelope envelopeSet = budgets.get(lookupKey);
+        if (budgetNames.contains(name) == false | envelopeSet == null) {
+            return false;
+        } else {
+            budgets.get(lookupKey).setBudgetted(money);
+            return true;
+        }
+
     }
 
     record[] getRecordsFromAccount(String name, Date start, Date end) {

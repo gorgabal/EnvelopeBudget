@@ -49,4 +49,17 @@ public class envelope {
         output += this.name;
         return output;
     }
+
+    public int getMonth() {
+        return date.get(Calendar.MONTH);
+    }
+
+    public int getYear() {
+        return date.get(Calendar.YEAR);
+    }
+
+    public String toString() {
+        String result = this.ID() + " " + this.getBudgetted();
+        return result;
+    }
 }
