@@ -2,9 +2,20 @@ package envelopeBudget.data;
 
 import org.apache.commons.lang.NotImplementedException;
 
+import javax.naming.directory.AttributeInUseException;
+import javax.xml.soap.Node;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 public class manager {
+
+
+    private Map<String, envelope> budgets; //mapping YYYYMM{BudgetName}
+    private Node accounts;
+    private ArrayList<String> budgetNames; //contains the names of all the budgets.
+
+
 
     /**
      * @param name Name of the account you want information on
@@ -19,6 +30,31 @@ public class manager {
      */
     int toBudget() {
         throw new NotImplementedException("Needs Implementation!");
+    }
+
+    void createAccount(String name) {
+        createAccount(name, 0);
+    }
+
+    void createAccount(String name, int initialValue) {
+        throw new NotImplementedException("Needs implementation!");
+    }
+
+    void createBudget(String name) throws Exception {
+        createBudget(name, "", 0);
+    }
+
+    void createBudget(String name, String description, int initialValue) throws Exception {
+        if (!budgetNames.contains(name)) {
+            budgetNames.add(name);
+        }
+
+        envelope newBudget = new envelope(name, description, initialValue, new Date(System.currentTimeMillis()));
+        if (budgets.containsKey(newBudget.ID()) == false) {
+            budgets.put(newBudget.ID(), newBudget);
+        } else {
+            throw new Exception("Budget with ID " + newBudget + " is already stored. discarding this one");
+        }
     }
 
     /**

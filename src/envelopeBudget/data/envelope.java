@@ -1,18 +1,21 @@
 package envelopeBudget.data;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class envelope {
     private String name;
     private String description;
-    private Date month;
     private int budgetted;
+    private Calendar date;
 
-    public envelope(String name, String description, Date month, int budgetted) {
+    public envelope(String name, String description, int budgetted, Date year_month) {
         this.name = name;
         this.description = description;
-        this.month = month;
         this.budgetted = budgetted;
+        this.date = new GregorianCalendar();
+        this.date.setTime(year_month);
     }
 
     public String getName() {
@@ -31,19 +34,19 @@ public class envelope {
         this.description = description;
     }
 
-    public Date getMonth() {
-        return month;
-    }
-
-    public void setMonth(Date month) {
-        this.month = month;
-    }
-
     public int getBudgetted() {
         return budgetted;
     }
 
     public void setBudgetted(int budgetted) {
         this.budgetted = budgetted;
+    }
+
+    public String ID() {
+        String output = "";
+        output += date.get(Calendar.YEAR);
+        output += date.get(Calendar.MONTH);
+        output += this.name;
+        return output;
     }
 }
