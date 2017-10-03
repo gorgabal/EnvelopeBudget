@@ -76,6 +76,6 @@ GUI -- manager
 SAVE - manager
 manager -- account
 manager -- envelope
-manager -- record
+account -- record
 @enduml
 
