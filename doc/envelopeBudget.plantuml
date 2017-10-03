@@ -4,7 +4,7 @@ package dataManager{
 
     class manager{
     The manager seperates the storage of data from the rest of the program.
-    Also does calculation like, spend this month, to be budgetted, etc
+    Also does calculation like, spend this month, to be budgeted, etc
     storage outsourced to submanagers.
     ----
 
@@ -47,12 +47,12 @@ package dataManager{
     class envelope{
       String name
       Date month
-      int budgetted
+      int budgeted
       int spend
       int getBudget()
       int setBudget()
       --
-      stores how much is budgetted
+      stores how much is budgeted
       for a specific category in a certain month.
     }
     class SAVE{

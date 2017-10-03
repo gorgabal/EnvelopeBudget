@@ -2,7 +2,6 @@ package envelopeBudget.data;
 
 import org.apache.commons.lang.NotImplementedException;
 
-import javax.naming.directory.AttributeInUseException;
 import javax.xml.soap.Node;
 import java.util.*;
 
@@ -77,7 +76,7 @@ public class manager {
         if (budgetNames.contains(name) == false | envelopeSet == null) {
             return false;
         } else {
-            budgets.get(lookupKey).setBudgetted(money);
+            budgets.get(lookupKey).setBudgeted(money);
             return true;
         }
 
@@ -98,5 +97,7 @@ public class manager {
     record[] getRecordsFromBudget(String name) {
         throw new NotImplementedException("Needs Implementation!");
     }
+
+
 }
 

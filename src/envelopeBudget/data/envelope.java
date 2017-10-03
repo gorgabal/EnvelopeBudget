@@ -7,13 +7,13 @@ import java.util.GregorianCalendar;
 public class envelope {
     private String name;
     private String description;
-    private int budgetted;
+    private int budgeted;
     private Calendar date;
 
-    public envelope(String name, String description, int budgetted, Date year_month) {
+    public envelope(String name, String description, int budgeted, Date year_month) {
         this.name = name;
         this.description = description;
-        this.budgetted = budgetted;
+        this.budgeted = budgeted;
         this.date = new GregorianCalendar();
         this.date.setTime(year_month);
     }
@@ -34,12 +34,12 @@ public class envelope {
         this.description = description;
     }
 
-    public int getBudgetted() {
-        return budgetted;
+    public int getBudgeted() {
+        return budgeted;
     }
 
-    public void setBudgetted(int budgetted) {
-        this.budgetted = budgetted;
+    public void setBudgeted(int budgeted) {
+        this.budgeted = budgeted;
     }
 
     public String ID() {
@@ -59,7 +59,7 @@ public class envelope {
     }
 
     public String toString() {
-        String result = this.ID() + " " + this.getBudgetted();
+        String result = this.ID() + " " + this.getBudgeted();
         return result;
     }
 }
