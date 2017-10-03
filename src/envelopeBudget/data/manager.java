@@ -8,9 +8,14 @@ import java.util.*;
 public class manager {
 
 
+    static private envelope noBudget;
     private Map<String, envelope> budgets = new HashMap<>(); //mapping YYYYMM{BudgetName}
-    private Node accounts;
+    private ArrayList<account> accounts = new ArrayList<>();
     private ArrayList<String> budgetNames = new ArrayList<>(); //contains the names of all the budgets.
+
+    public manager() {
+
+    }
 
     /**
      * @param name Name of the account you want information on
@@ -82,11 +87,8 @@ public class manager {
 
     }
 
-    record[] getRecordsFromAccount(String name, Date start, Date end) {
-        throw new NotImplementedException("Needs Implementation!");
-    }
 
-    record[] getRecordsFromAccount(String name) {
+    record[] getRecordsFromAllAccounts() {
         throw new NotImplementedException("Needs Implementation!");
     }
 
@@ -99,5 +101,17 @@ public class manager {
     }
 
 
+    public ArrayList<account> getAccounts() {
+        throw new NotImplementedException("Needs Implementation!");
+    }
+
+    public account getAccount(String name) {
+        throw new NotImplementedException("Needs Implementation!");
+    }
+
+    public envelope noEnvelope() {
+        throw new NotImplementedException("Needs implementation!");
+
+    }
 }
 
