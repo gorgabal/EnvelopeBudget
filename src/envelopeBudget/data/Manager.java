@@ -1,5 +1,6 @@
 package envelopeBudget.data;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.apache.commons.lang.NotImplementedException;
 
 import java.util.*;
@@ -7,13 +8,11 @@ import java.util.*;
 public class Manager {
 
 
-    static private Envelope noBudget;
-    private Map<String, Envelope> budgets = new HashMap<>(); //mapping YYYYMM{BudgetName}
+    private ArrayList<Envelope> budgets = new ArrayList<>();
     private ArrayList<Account> accounts = new ArrayList<>();
-    private ArrayList<String> budgetNames = new ArrayList<>(); //contains the names of all the budgets.
 
     public Manager() {
-
+        budgets.add(new Envelope("No Budget", "Special envelope for holding non-categorized transactions"));
     }
 
     /**
@@ -30,9 +29,8 @@ public class Manager {
      * @return null if none found, else the relevant Account
      */
     private Account getAccountFromName(String name) throws Exception {
-
         for (int i = 0; i < accounts.size(); i++) {
-            if (accounts.get(i).getName() == name) {
+            if (accounts.get(i).name == name) {
                 return accounts.get(i);
             }
         }
@@ -45,7 +43,7 @@ public class Manager {
      * @return The difference of all money available, and all money budgetted
      */
     int toBudget() {
-        assert false; //todo
+        throw new UnsupportedOperationException(); //todo
 
     }
 
@@ -53,68 +51,53 @@ public class Manager {
         createAccount(name, "", 0);
     }
 
+    /**
+     * Create a new account
+     *
+     * @param name         the name of the account
+     * @param description  optional description
+     * @param initialValue starting value.
+     */
     void createAccount(String name, String description, int initialValue) {
         Account newAccount = new Account(name, description, initialValue);
         accounts.add(newAccount);
     }
 
-    void createBudget(String name) throws Exception {
-        createBudget(name, "", 0);
-    }
-
-    void createBudget(String name, String description, int initialValue) throws Exception {
-        throw new UnsupportedOperationException(); //todo
-        if (!budgetNames.contains(name)) {
-            budgetNames.add(name);
-        }
-
-        Envelope newBudget = new Envelope(name, description, initialValue, new Date(System.currentTimeMillis()));
-        if (budgets.containsKey(newBudget.ID()) == false) {
-            budgets.put(newBudget.ID(), newBudget);
-        } else {
-            throw new Exception("Budget with ID " + newBudget + " is already stored. discarding this one");
-        }
-    }
-
     /**
-     * @param month The EnvelopeMonth, from 1-12, for which you want budget information
-     * @return An array of envelopes, containing this months budget information
+     * sets a new budget
+     * @param name The name of the budget you want to create or adjust
+     * @param month In which month do you want to adjust it?
+     * @param year In which year do you want to adjust it
+     * @param money How much money do you want to be in the budget?
      */
-    ArrayList<Envelope> getBudgets(int month, int year) {
-        throw new UnsupportedOperationException(); //todo
-        ArrayList<Envelope> result = new ArrayList<>();
-
-        Iterator<Envelope> iter = budgets.values().iterator();
-        while (iter.hasNext()) {
-            Envelope current = iter.next();
-            if (current.getMonth() == month && current.getYear() == year) {
-                result.add(current);
+    void setBudget(String name, String description, Integer month, Integer year, int money) {
+        for (Envelope e : budgets) {
+            if (e.name == name) {
+                e.setBudget(new EnvelopeMonth(year, month), money);
+                return;
             }
         }
 
-        return result;
-    }
-
-    boolean setBudget(String name, Integer month, Integer year, int money) {
-        throw new UnsupportedOperationException(); //todo
-        String lookupKey = year.toString() + month.toString() + name;
-        Envelope envelopeSet = budgets.get(lookupKey);
-        if (budgetNames.contains(name) == false | envelopeSet == null) {
-            return false;
-        } else {
-            budgets.get(lookupKey).setBudgeted(money);
-            return true;
-        }
-
+        budgets.add(new Envelope(name, description));
+        setBudget(name, description, month, year, money); //should reach return statement in the if above.
     }
 
 
     Record[] getRecordsFromAllAccounts() {
+        ArrayList<Record> result = new ArrayList<>();
+        ArrayList<Account> accounts = getAccounts();
+        for (Account acc : accounts) {
+            result.addAll(acc.records);
+        }
+        return (Record[]) result.toArray();
+    }
+
+    Record[] getRecordsFromBudget(Envelope name, Date begin, Date end) {
         throw new UnsupportedOperationException(); //todo
     }
 
-    Record[] getRecordsFromBudget(String name, Date begin, Date end) {
-        throw new UnsupportedOperationException(); //todo
+    Record[] getRecordsFromDate(Account name, Date begin, Date end) {
+        throw new UnsupportedOperationException();//todo
     }
 
     Record[] getRecordsFromBudget(String name) {
@@ -124,7 +107,6 @@ public class Manager {
 
     public ArrayList<Account> getAccounts() {
         throw new UnsupportedOperationException(); //todo
-        assert false; //todo
     }
 
     public Account getAccount(String name) {
@@ -132,7 +114,16 @@ public class Manager {
     }
 
     public Envelope noEnvelope() {
-        throw new UnsupportedOperationException(); //todo
+        return getBudgetsFromName("No Budget");
+    }
+
+    public Envelope getBudgetsFromName(String name) {
+        for (Envelope e : budgets) {
+            if (e.name == name) {
+                return e;
+            }
+        }
+        return null;
     }
 }
 

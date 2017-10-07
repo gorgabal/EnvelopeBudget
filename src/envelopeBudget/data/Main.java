@@ -19,9 +19,10 @@ public class Main {
         }
     }
 
-
+    //todo rewrite when the rest is kinda done.
     public static boolean testrun() {
-        //test evelopes
+        /*
+        //todo test evelopes
         Manager man = new Manager();
 
         try {
@@ -58,8 +59,10 @@ public class Main {
 
         // todo test envelopes in combination with accounts and records.
 
+*/
         return true; // assumes that no exeptions has occured.
     }
+
 
 }
 

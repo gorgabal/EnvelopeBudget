@@ -3,12 +3,11 @@ package envelopeBudget.data;
 import org.apache.commons.lang.NotImplementedException;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Account {
-    private String name;
-    private String description;
-    private ArrayList records;
+    public String name;
+    public String description;
+    public ArrayList records;
 
 
     public Account(String name, String description, int initialValue) {
@@ -20,28 +19,6 @@ public class Account {
         }
     }
 
-    public String getName() {
-        return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-    public int getValue() {
-        throw new NotImplementedException("Value calculation not implemented yet!");
-    }//todo
-
-    public void addRecord(Date date, int amount, String description, String benefit, Envelope category) {
-    }
-}
 
