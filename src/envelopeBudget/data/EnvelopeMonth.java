@@ -1,8 +1,8 @@
 package envelopeBudget.data;
 
 public class EnvelopeMonth {
-    public int month; // 0-11
-    public int year; // YYYY
+    public Integer month; // 0-11
+    public Integer year; // YYYY
 
     public EnvelopeMonth(int year, int month) {
         this.month = month;
@@ -12,8 +12,8 @@ public class EnvelopeMonth {
     @Override
     public String toString() {
         String result = "";
-        result += ((String) year);
-        result += ((String) month);
+        result += year.toString();
+        result += month.toString();
         return result;
     }
 }

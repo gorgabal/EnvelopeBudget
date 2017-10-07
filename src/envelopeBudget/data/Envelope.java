@@ -1,14 +1,16 @@
 package envelopeBudget.data;
 
+import com.intellij.vcs.log.Hash;
+
+import java.util.HashMap;
 import java.util.Map;
 
-//todo make Envelope class so that it contains the budgets for sereval dates, but only one class per budget name.
 public class Envelope {
 
     public String name;
     public String description;
-    private Map<String, int> budgetted; //YYYYMM
-    private Map<String, BudgetGoal> budgetGoals; //YYYYMM
+    private Map<String, Integer> budgetted = new HashMap<>(); //YYYYMM
+    private Map<String, BudgetGoal> budgetGoals = new HashMap<>(); //YYYYMM
 
     public Envelope(String name, String description) {
         this.name = name;
@@ -38,6 +40,6 @@ public class Envelope {
     }
 
     public String toString() {
-        throw new UnsupportedOperationException("not yet implemented!");
+        throw new UnsupportedOperationException("not yet implemented!"); //todo
     }
 }
