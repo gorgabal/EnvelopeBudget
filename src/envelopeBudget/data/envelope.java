@@ -1,65 +1,48 @@
 package envelopeBudget.data;
 
+import com.intellij.ide.ui.EditorOptionsTopHitProvider;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Map;
 
+//todo make envelope class so that it contains the budgets for sereval dates, but only one class per budget name.
 public class envelope {
-    private String name;
-    private String description;
-    private int budgeted;
-    private Calendar date;
+    public String name;
+    public String description;
+    private Map<String, int> budgetted; //YYYYMM
+    private Map<String, budgetGoal> budgetGoals; //YYYYMM
 
-    public envelope(String name, String description, int budgeted, Date year_month) {
+    public envelope(String name, String description) {
         this.name = name;
         this.description = description;
-        this.budgeted = budgeted;
-        this.date = new GregorianCalendar();
-        this.date.setTime(year_month);
     }
 
-    public String getName() {
-        return name;
+    public budgetGoal(int year, int month) {
+        throw new UnsupportedOperationException("not yet implemented!");
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public setBudgetGoal(int year, int month, int amount,) {
+        throw new UnsupportedOperationException("not yet implemented!");
     }
 
-    public String getDescription() {
-        return description;
+    public static String date(int year, int month) {
+        String result = "";
+        result += ((String) year);
+        result += ((String) month);
+        return result;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public int getBudget(int year, int month) {
+        throw new UnsupportedOperationException("not yet implemented!");
     }
 
-    public int getBudgeted() {
-        return budgeted;
-    }
-
-    public void setBudgeted(int budgeted) {
-        this.budgeted = budgeted;
-    }
-
-    public String ID() {
-        String output = "";
-        output += date.get(Calendar.YEAR);
-        output += date.get(Calendar.MONTH);
-        output += this.name;
-        return output;
-    }
-
-    public int getMonth() {
-        return date.get(Calendar.MONTH);
-    }
-
-    public int getYear() {
-        return date.get(Calendar.YEAR);
+    public void setBudget(int year, int month, int budget, budgetGoal.budgetType type) {
+        throw new UnsupportedOperationException("not yet implemented!");
     }
 
     public String toString() {
-        String result = this.ID() + " " + this.getBudgeted();
-        return result;
+        throw new UnsupportedOperationException("not yet implemented!");
     }
 }

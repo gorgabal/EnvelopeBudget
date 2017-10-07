@@ -16,7 +16,7 @@ public class account {
         this.description = description;
         this.records = new ArrayList<>();
         if (initialValue != 0) {
-            throw new NotImplementedException("Initial Value not yet implemented!");
+            throw new NotImplementedException("Initial Value not yet implemented!"); //todo
         }
     }
 
@@ -39,7 +39,7 @@ public class account {
 
     public int getValue() {
         throw new NotImplementedException("Value calculation not implemented yet!");
-    }
+    }//todo
 
     public void addRecord(Date date, int amount, String description, String benefit, envelope category) {
     }

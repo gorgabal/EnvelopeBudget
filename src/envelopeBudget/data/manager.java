@@ -1,6 +1,7 @@
 package envelopeBudget.data;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.jetbrains.annotations.Nullable;
 
 import javax.xml.soap.Node;
 import java.util.*;
@@ -22,22 +23,41 @@ public class manager {
      * @return The current value of that account
      */
     public int getAccountValue(String name) {
+        //todo implement this!
         throw new NotImplementedException("Needs Implementation!");
+    }
+
+    /**
+     * @param name the name of the account you want to get
+     * @return null if none found, else the relevant account
+     */
+    private account getAccountFromName(String name) throws Exception {
+
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i).getName() == name) {
+                return accounts.get(i);
+            }
+        }
+        //if none found
+        throw new Exception("Element not Found!");
+
     }
 
     /**
      * @return The difference of all money available, and all money budgetted
      */
     int toBudget() {
-        throw new NotImplementedException("Needs Implementation!");
+        assert false; //todo
+
     }
 
     void createAccount(String name) {
-        createAccount(name, 0);
+        createAccount(name, "", 0);
     }
 
-    void createAccount(String name, int initialValue) {
-        throw new NotImplementedException("Needs implementation!");
+    void createAccount(String name, String description, int initialValue) {
+        account newAccount = new account(name, description, initialValue);
+        accounts.add(newAccount);
     }
 
     void createBudget(String name) throws Exception {
@@ -45,6 +65,7 @@ public class manager {
     }
 
     void createBudget(String name, String description, int initialValue) throws Exception {
+        throw new UnsupportedOperationException(); //todo
         if (!budgetNames.contains(name)) {
             budgetNames.add(name);
         }
@@ -62,6 +83,7 @@ public class manager {
      * @return An array of envelopes, containing this months budget information
      */
     ArrayList<envelope> getBudgets(int month, int year) {
+        throw new UnsupportedOperationException(); //todo
         ArrayList<envelope> result = new ArrayList<>();
 
         Iterator<envelope> iter = budgets.values().iterator();
@@ -76,6 +98,7 @@ public class manager {
     }
 
     boolean setBudget(String name, Integer month, Integer year, int money) {
+        throw new UnsupportedOperationException(); //todo
         String lookupKey = year.toString() + month.toString() + name;
         envelope envelopeSet = budgets.get(lookupKey);
         if (budgetNames.contains(name) == false | envelopeSet == null) {
@@ -89,29 +112,29 @@ public class manager {
 
 
     record[] getRecordsFromAllAccounts() {
-        throw new NotImplementedException("Needs Implementation!");
+        throw new UnsupportedOperationException(); //todo
     }
 
     record[] getRecordsFromBudget(String name, Date begin, Date end) {
-        throw new NotImplementedException("Needs Implementation!");
+        throw new UnsupportedOperationException(); //todo
     }
 
     record[] getRecordsFromBudget(String name) {
-        throw new NotImplementedException("Needs Implementation!");
+        throw new UnsupportedOperationException(); //todo
     }
 
 
     public ArrayList<account> getAccounts() {
-        throw new NotImplementedException("Needs Implementation!");
+        throw new UnsupportedOperationException(); //todo
+        assert false; //todo
     }
 
     public account getAccount(String name) {
-        throw new NotImplementedException("Needs Implementation!");
+        throw new UnsupportedOperationException(); //todo
     }
 
     public envelope noEnvelope() {
-        throw new NotImplementedException("Needs implementation!");
-
+        throw new UnsupportedOperationException(); //todo
     }
 }
 
