@@ -5,13 +5,13 @@ import org.apache.commons.lang.NotImplementedException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class account {
+public class Account {
     private String name;
     private String description;
     private ArrayList records;
 
 
-    public account(String name, String description, int initialValue) {
+    public Account(String name, String description, int initialValue) {
         this.name = name;
         this.description = description;
         this.records = new ArrayList<>();
@@ -41,7 +41,7 @@ public class account {
         throw new NotImplementedException("Value calculation not implemented yet!");
     }//todo
 
-    public void addRecord(Date date, int amount, String description, String benefit, envelope category) {
+    public void addRecord(Date date, int amount, String description, String benefit, Envelope category) {
     }
 }
 

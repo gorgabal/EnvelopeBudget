@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.Iterator;
 
-public class main {
+public class Main {
 
     static boolean DEBUG = true;
 
@@ -22,7 +22,7 @@ public class main {
 
     public static boolean testrun() {
         //test evelopes
-        manager man = new manager();
+        Manager man = new Manager();
 
         try {
             man.createBudget("expenses", "An budget to test other budgets", 0);
@@ -41,9 +41,9 @@ public class main {
         man.createAccount("Checkings");
         man.createAccount("Credit Card", -10);
         man.getAccounts().iterator();
-        Iterator<account> accounts = man.getAccounts().iterator();
+        Iterator<Account> accounts = man.getAccounts().iterator();
         while (accounts.hasNext()) {
-            account a = accounts.next();
+            Account a = accounts.next();
             System.out.println(a.getName() + ": " + a.getValue());
         }
 

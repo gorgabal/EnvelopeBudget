@@ -1,18 +1,17 @@
 package envelopeBudget.data;
 
 import java.util.Date;
-import java.util.UUID;
 
-class record {
+class Record {
     private Date date;
     private int amount;
-    private envelopeBudget.data.account account;
-    private envelope category;
+    private Account account;
+    private Envelope category;
     private String description;
     private String benefit;
     private boolean reconsiled;
 
-    public record( Date date, int amount, envelopeBudget.data.account account, envelope category, String description, String benefit) {
+    public Record(Date date, int amount, Account account, Envelope category, String description, String benefit) {
         this.date = date;
         this.amount = amount;
         this.account = account;
@@ -39,19 +38,19 @@ class record {
         this.amount = amount;
     }
 
-    public envelopeBudget.data.account getAccount() {
+    public Account getAccount() {
         return account;
     }
 
-    public void setAccount(envelopeBudget.data.account account) {
+    public void setAccount(Account account) {
         this.account = account;
     }
 
-    public envelope getCategory() {
+    public Envelope getCategory() {
         return category;
     }
 
-    public void setCategory(envelope category) {
+    public void setCategory(Envelope category) {
         this.category = category;
     }
 

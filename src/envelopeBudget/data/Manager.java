@@ -1,26 +1,24 @@
 package envelopeBudget.data;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.jetbrains.annotations.Nullable;
 
-import javax.xml.soap.Node;
 import java.util.*;
 
-public class manager {
+public class Manager {
 
 
-    static private envelope noBudget;
-    private Map<String, envelope> budgets = new HashMap<>(); //mapping YYYYMM{BudgetName}
-    private ArrayList<account> accounts = new ArrayList<>();
+    static private Envelope noBudget;
+    private Map<String, Envelope> budgets = new HashMap<>(); //mapping YYYYMM{BudgetName}
+    private ArrayList<Account> accounts = new ArrayList<>();
     private ArrayList<String> budgetNames = new ArrayList<>(); //contains the names of all the budgets.
 
-    public manager() {
+    public Manager() {
 
     }
 
     /**
-     * @param name Name of the account you want information on
-     * @return The current value of that account
+     * @param name Name of the Account you want information on
+     * @return The current value of that Account
      */
     public int getAccountValue(String name) {
         //todo implement this!
@@ -28,10 +26,10 @@ public class manager {
     }
 
     /**
-     * @param name the name of the account you want to get
-     * @return null if none found, else the relevant account
+     * @param name the name of the Account you want to get
+     * @return null if none found, else the relevant Account
      */
-    private account getAccountFromName(String name) throws Exception {
+    private Account getAccountFromName(String name) throws Exception {
 
         for (int i = 0; i < accounts.size(); i++) {
             if (accounts.get(i).getName() == name) {
@@ -56,7 +54,7 @@ public class manager {
     }
 
     void createAccount(String name, String description, int initialValue) {
-        account newAccount = new account(name, description, initialValue);
+        Account newAccount = new Account(name, description, initialValue);
         accounts.add(newAccount);
     }
 
@@ -70,7 +68,7 @@ public class manager {
             budgetNames.add(name);
         }
 
-        envelope newBudget = new envelope(name, description, initialValue, new Date(System.currentTimeMillis()));
+        Envelope newBudget = new Envelope(name, description, initialValue, new Date(System.currentTimeMillis()));
         if (budgets.containsKey(newBudget.ID()) == false) {
             budgets.put(newBudget.ID(), newBudget);
         } else {
@@ -79,16 +77,16 @@ public class manager {
     }
 
     /**
-     * @param month The month, from 1-12, for which you want budget information
+     * @param month The EnvelopeMonth, from 1-12, for which you want budget information
      * @return An array of envelopes, containing this months budget information
      */
-    ArrayList<envelope> getBudgets(int month, int year) {
+    ArrayList<Envelope> getBudgets(int month, int year) {
         throw new UnsupportedOperationException(); //todo
-        ArrayList<envelope> result = new ArrayList<>();
+        ArrayList<Envelope> result = new ArrayList<>();
 
-        Iterator<envelope> iter = budgets.values().iterator();
+        Iterator<Envelope> iter = budgets.values().iterator();
         while (iter.hasNext()) {
-            envelope current = iter.next();
+            Envelope current = iter.next();
             if (current.getMonth() == month && current.getYear() == year) {
                 result.add(current);
             }
@@ -100,7 +98,7 @@ public class manager {
     boolean setBudget(String name, Integer month, Integer year, int money) {
         throw new UnsupportedOperationException(); //todo
         String lookupKey = year.toString() + month.toString() + name;
-        envelope envelopeSet = budgets.get(lookupKey);
+        Envelope envelopeSet = budgets.get(lookupKey);
         if (budgetNames.contains(name) == false | envelopeSet == null) {
             return false;
         } else {
@@ -111,29 +109,29 @@ public class manager {
     }
 
 
-    record[] getRecordsFromAllAccounts() {
+    Record[] getRecordsFromAllAccounts() {
         throw new UnsupportedOperationException(); //todo
     }
 
-    record[] getRecordsFromBudget(String name, Date begin, Date end) {
+    Record[] getRecordsFromBudget(String name, Date begin, Date end) {
         throw new UnsupportedOperationException(); //todo
     }
 
-    record[] getRecordsFromBudget(String name) {
+    Record[] getRecordsFromBudget(String name) {
         throw new UnsupportedOperationException(); //todo
     }
 
 
-    public ArrayList<account> getAccounts() {
+    public ArrayList<Account> getAccounts() {
         throw new UnsupportedOperationException(); //todo
         assert false; //todo
     }
 
-    public account getAccount(String name) {
+    public Account getAccount(String name) {
         throw new UnsupportedOperationException(); //todo
     }
 
-    public envelope noEnvelope() {
+    public Envelope noEnvelope() {
         throw new UnsupportedOperationException(); //todo
     }
 }
