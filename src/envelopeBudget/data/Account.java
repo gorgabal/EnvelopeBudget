@@ -19,6 +19,10 @@ public class Account {
         }
     }
 
+    public int value() {
+        throw new UnsupportedOperationException("Needs implementation!") //todo
+    }
+
     }
 
 

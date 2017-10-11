@@ -30,11 +30,30 @@ public class Envelope {
         budgetGoals.put(date.toString(), budgetgoal);
     }
 
+    /**
+     * get ammount of money budgetted for specified month
+     *
+     * @param year  the relevant year
+     * @param month the relevant month
+     * @return int in cents. 100 = 1 euro.
+     */
     public int getBudget(int year, int month) {
         EnvelopeMonth enMonth = new EnvelopeMonth(year, month);
+        return getBudget(enMonth);
+    }
+
+    public int getBudget(EnvelopeMonth enMonth) {
         return budgetted.get(enMonth.toString());
     }
 
+    /**
+     * Gets all money budgetted.
+     *
+     * @return all money budgetted in space and time
+     */
+    public int totalBudget() {
+        throw new UnsupportedOperationException(); //todo
+    }
     public void setBudget(EnvelopeMonth enMonth, int budget) {
         budgetted.put(enMonth.toString(), budget);
     }

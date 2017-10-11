@@ -1,9 +1,9 @@
 package envelopeBudget.data;
 
-import com.sun.org.apache.regexp.internal.RE;
-import org.apache.commons.lang.NotImplementedException;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Manager {
 
@@ -20,8 +20,19 @@ public class Manager {
      * @return The current value of that Account
      */
     public int getAccountValue(String name) {
-        //todo implement this!
-        throw new NotImplementedException("Needs Implementation!");
+        int result = 0;
+        Record recs[];
+        try {
+            recs = (Record[]) getAccountFromName(name).records.toArray();
+        } catch (Exception e) {
+            System.out.println("Account " + name + "not found, assuming empty account");
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < recs.length; i++) {
+            result += recs[i].amount;
+        }
+        return result;
     }
 
     /**
@@ -40,11 +51,41 @@ public class Manager {
     }
 
     /**
-     * @return The difference of all money available, and all money budgetted
+     * @return The difference of all money ever received, and all money budgetted
      */
     int toBudget() {
-        throw new UnsupportedOperationException(); //todo
+        return totalMoneyAvailable() - totalMoneyBudgetted();
+    }
 
+    private int totalMoneyBudgetted() {
+        Calendar cal = new GregorianCalendar();
+        int result = 0;
+        for (Envelope enve : budgets) {
+            result += enve.totalBudget();
+        }
+        return result;
+    }
+
+    private int totalMoneyAvailable() {
+        int result = 0;
+        for (Account acc : accounts) {
+            result += acc.value();
+
+        }
+        return result;
+    }
+
+    /**
+     * Calculates how much money is left of this budget.
+     *
+     * @param year
+     * @param month
+     * @param budget
+     * @return
+     */
+    private int availableFromBudget(EnvelopeMonth month, Envelope budget) {
+        // all money budgetted - allRelevant transactions, until specified date.
+        throw new UnsupportedOperationException("Needs implementation!") //todo
     }
 
     void createAccount(String name) {
