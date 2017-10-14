@@ -1,6 +1,4 @@
-package envelopeBudget.data;
-
-import java.time.temporal.TemporalAmount;
+package data;
 
 public class BudgetGoal {
     public budgetType budgettype;

@@ -1,12 +1,13 @@
-package envelopeBudget.data;
+package data;
 
-import com.intellij.vcs.log.Hash;
-
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Envelope {
 
+    public static Envelope noBudget = new Envelope("No Budget", "Envelope for transactionts without a budget");
     public String name;
     public String description;
     private Map<String, Integer> budgetted = new HashMap<>(); //YYYYMM
@@ -52,6 +53,17 @@ public class Envelope {
      * @return all money budgetted in space and time
      */
     public int totalBudget() {
+        Calendar cal = new GregorianCalendar();
+        EnvelopeMonth month = new EnvelopeMonth(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH));
+        return totalBudget(month);
+    }
+
+    /**
+     * Gets all money budgetted until certain date
+     *
+     * @return all money budgetted untill a certain date
+     */
+    public int totalBudget(EnvelopeMonth month) {
         throw new UnsupportedOperationException(); //todo
     }
     public void setBudget(EnvelopeMonth enMonth, int budget) {

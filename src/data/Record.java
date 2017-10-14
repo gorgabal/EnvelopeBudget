@@ -1,4 +1,4 @@
-package envelopeBudget.data;
+package data;
 
 import java.util.Date;
 
@@ -19,6 +19,5 @@ class Record {
         this.description = description;
         this.benefit = benefit;
         this.reconsiled = false;
-
     }
 }

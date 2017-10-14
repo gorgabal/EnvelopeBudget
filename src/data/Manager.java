@@ -1,4 +1,6 @@
-package envelopeBudget.data;
+package data;
+
+import com.intellij.ide.ui.AppearanceOptionsTopHitProvider;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,7 +28,7 @@ public class Manager {
             recs = (Record[]) getAccountFromName(name).records.toArray();
         } catch (Exception e) {
             System.out.println("Account " + name + "not found, assuming empty account");
-            e.printStackTrace();
+            return 0;
         }
 
         for (int i = 0; i < recs.length; i++) {
@@ -78,15 +80,20 @@ public class Manager {
     /**
      * Calculates how much money is left of this budget.
      *
-     * @param year
      * @param month
      * @param budget
      * @return
      */
     private int availableFromBudget(EnvelopeMonth month, Envelope budget) {
-        // all money budgetted - allRelevant transactions, until specified date.
-        throw new UnsupportedOperationException("Needs implementation!") //todo
+        Record recs[] = getRecordsFromAllAccounts(month);
+        int result = budget.totalBudget(month);
+        for (int i = 0; i < recs.length; i++) {
+            result = -recs[i].amount;
+        }
+        return result;
     }
+
+
 
     void createAccount(String name) {
         createAccount(name, "", 0);
@@ -125,46 +132,58 @@ public class Manager {
 
 
     Record[] getRecordsFromAllAccounts() {
+        EnvelopeMonth month = new EnvelopeMonth();
+        return getRecordsFromAllAccounts(month);
+    }
+
+    /**
+     * gets money available on a certain month.
+     *
+     * @param month
+     * @return
+     */
+    private Record[] getRecordsFromAllAccounts(EnvelopeMonth month) {
         ArrayList<Record> result = new ArrayList<>();
-        ArrayList<Account> accounts = getAccounts();
         for (Account acc : accounts) {
-            result.addAll(acc.records);
+            result.addAll(acc.getRecordsUntilDate(month.toDate()));
         }
         return (Record[]) result.toArray();
     }
 
+
     Record[] getRecordsFromBudget(Envelope name, Date begin, Date end) {
-        throw new UnsupportedOperationException(); //todo
+        ArrayList<Record> result = new ArrayList<>();
+        for (Account accs : accounts) {
+            Record[] rec = accs.getRecordsFromDate(begin, end).toArray(new Record[0]);
+            for (int i = 0; i < rec.length; i++) {
+                if (rec[i].category.name == name.name) {
+                    result.add(rec[i]);
+                }
+            }
+        }
+        return result.toArray(new Record[0]);
     }
 
-    Record[] getRecordsFromDate(Account name, Date begin, Date end) {
-        throw new UnsupportedOperationException();//todo
+    Record[] getRecordsFromBudget(Envelope name) {
+        return getRecordsFromBudget(name, new Date(0), new Date(Long.MAX_VALUE));
     }
 
-    Record[] getRecordsFromBudget(String name) {
-        throw new UnsupportedOperationException(); //todo
+    public Account getAccount(String name) throws Exception {
+        for (Account acc : accounts) {
+            if (acc.name == name) {
+                return acc;
+            }
+        }
+        throw new Exception("Account not found!");
     }
 
-
-    public ArrayList<Account> getAccounts() {
-        throw new UnsupportedOperationException(); //todo
-    }
-
-    public Account getAccount(String name) {
-        throw new UnsupportedOperationException(); //todo
-    }
-
-    public Envelope noEnvelope() {
-        return getBudgetsFromName("No Budget");
-    }
-
-    public Envelope getBudgetsFromName(String name) {
+    public Envelope getBudgetsFromName(String name) throws Exception {
         for (Envelope e : budgets) {
             if (e.name == name) {
                 return e;
             }
         }
-        return null;
+        throw new Exception("Budget not found!");
     }
 }
 
