@@ -5,28 +5,44 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class EnvelopeMonth {
-    public Integer month; // 0-11
-    public Integer year; // YYYY
+    private Calendar cal;
 
     public EnvelopeMonth(int year, int month) {
-        this.month = month;
-        this.year = year;
+        cal = new GregorianCalendar();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
     }
 
     /**
      * creates a new envelopeMonth with the current year and month
      */
     public EnvelopeMonth() {
-        Calendar cal = new GregorianCalendar();
-        this.month = cal.get(Calendar.MONTH);
-        this.year = cal.get(Calendar.YEAR);
+        cal = new GregorianCalendar();
+    }
+
+    public EnvelopeMonth(Calendar cal) {
+        this.cal = cal;
+    }
+
+    public EnvelopeMonth(long time) {
+        cal = new GregorianCalendar();
+        cal.setTimeInMillis(time);
+    }
+
+    public Integer getMonth() {
+        return cal.get(Calendar.MONTH);
+    }
+
+    public Integer getYear() {
+        return cal.get(Calendar.YEAR);
     }
 
     @Override
     public String toString() {
         String result = "";
-        result += year.toString();
-        result += month.toString();
+        result += getYear().toString();
+        result += getMonth().toString();
         return result;
     }
 
@@ -35,6 +51,14 @@ public class EnvelopeMonth {
     }
 
     public Calendar toCalendar() {
-        return new GregorianCalendar(year, month, 1);
+        return cal;
+    }
+
+    public void setPreviousMonth() {
+        cal.add(Calendar.MONTH, -1);
+    }
+
+    public void setNextMonth() {
+        cal.add(Calendar.MONTH, 1);
     }
 }

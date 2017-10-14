@@ -1,9 +1,6 @@
 package data;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Envelope {
 
@@ -18,9 +15,19 @@ public class Envelope {
         this.description = description;
     }
 
-    public BudgetGoal getBudgetGoal(EnvelopeMonth month) {
+    public BudgetGoal getBudgetGoal(EnvelopeMonth month) throws Exception {
+        BudgetGoal result;
+        result = budgetGoals.get(month.toString());
+        int i = 0;
+        while (result == null) {
+            if (i > 250) {
+                throw new Exception("Element not found!");
+            }
+            month.setPreviousMonth();
+            result = budgetGoals.get(month.toString());
+            i++;
+        }
         return budgetGoals.get(month.toString());
-        //todo if current goal does not exist, look back in the previous months and return that.
     }
 
     public void setBudgetGoal(EnvelopeMonth date, int amount, EnvelopeMonth targetDate, BudgetGoal.budgetType type) {
@@ -61,16 +68,37 @@ public class Envelope {
     /**
      * Gets all money budgetted until certain date
      *
-     * @return all money budgetted untill a certain date
+     * @return all money budgetted until a certain date
      */
     public int totalBudget(EnvelopeMonth month) {
-        throw new UnsupportedOperationException(); //todo
+        EnvelopeMonth begin = new EnvelopeMonth(0);
+        return totalBudget(begin, month);
     }
+
+
+    /**
+     * Gets all money budgetted in a time range.
+     *
+     * @return all money budgetted in specified time range.
+     */
+    public int totalBudget(EnvelopeMonth begin, EnvelopeMonth end) {
+        int result = 0;
+        while (begin.toCalendar().before(end.toCalendar())) {
+            Integer bud = budgetted.get(begin.toString());
+            if (bud != null) {
+                result += bud;
+            }
+        }
+        return result;
+    }
+
     public void setBudget(EnvelopeMonth enMonth, int budget) {
         budgetted.put(enMonth.toString(), budget);
     }
 
     public String toString() {
-        throw new UnsupportedOperationException("not yet implemented!"); //todo
+        String result = "";
+        result = "Budget: " + name + ", " + description + ", " + getBudget(new EnvelopeMonth());
+        return result;
     }
 }
