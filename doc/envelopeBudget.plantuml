@@ -2,6 +2,10 @@
 package data{
 
 
+interface DataInterface{
+    Has methods for interacting with dataManager from the world outside.
+}
+
     class Manager{
     The manager seperates the storage of data from the rest of the program.
     Also does calculation like, spend this month, to be budgeted, etc
@@ -11,47 +15,56 @@ package data{
     ----
     }
 
-    class Record{
-      int id
-      date date
-      int amount
-      account account
-      envelope category
-      String description
-      String benefit
-
-      --
-      Describes a single transaction
-    }
-
-
-
-    class Account {
-      int id
-      string name
-      string description
-      --
-      stores account information
-    }
-
-
-    class Envelope{
-      --
-      stores how much is budgeted
-      for a specific category in a certain month.
-    }
     class SAVE{
 
     --
     read and write's data to disk
     }
-    class EnvelopeMonth{
-        Identifier for month and year
+    package SQLlite <<Database>> {
+        object accounts{
+            int id
+            string name
+            string description
+        }
+        object records{
+            int id
+            date date
+            int amount
+            String description
+            string benefit
+            int account_id
+            int envelope_id
+
+        }
+
+        object envelopes{
+            int id
+            int month
+            int year
+            int goal_id
+            int category_id
+        }
+
+        object category{
+            int id
+            string name
+            string description
+        }
+
+        object goals{
+            int goal
+            date deadline
+            bool goalByDate
+            bool goalPerMonth
+        }
+
+       records --> accounts : account_id
+       records --> envelopes :envelope_id
+       envelopes --> goals : goal_id
+       envelopes --> category : category_id
+
     }
 
-    class BudgetGoal{
-        Stores budgetGoal
-    }
 }
 
 
@@ -64,12 +77,12 @@ class GUI{
 
 
 
-GUI -- Manager
+GUI -- DataInterface
 SAVE - Manager
-Manager -- Account
-Manager -- Envelope
-Account -- Record
-Envelope -- BudgetGoal
-Envelope -- EnvelopeMonth
+DataInterface -- Manager
+Manager -- SQLlite
+
+
+
 @enduml
 
