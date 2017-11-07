@@ -1,4 +1,6 @@
 @startuml
+
+
 package data{
 
 
@@ -18,8 +20,10 @@ interface DataInterface{
     class SAVE{
 
     --
+
     read and write's data to disk
     }
+
     package SQLlite <<Database>> {
         object accounts{
             int id
@@ -31,9 +35,9 @@ interface DataInterface{
             date date
             int amount
             String description
-            string benefit
+            int benefit_id
             int account_id
-            int envelope_id
+            int category_id
 
         }
 
@@ -49,6 +53,7 @@ interface DataInterface{
             int id
             string name
             string description
+            boolean hidden
         }
 
         object goals{
@@ -58,16 +63,41 @@ interface DataInterface{
             bool goalPerMonth
         }
 
+        object budgetLedger{
+
+            int id
+            int records_id
+            int category_id
+            int amount
+        }
+
+        object benefit {
+            int id
+            String name
+        }
+
+        note right of records
+        budgetsLedger total
+        and records total
+        should be the same
+        end note
+
        records --> accounts : account_id
-       records --> envelopes :envelope_id
+       records --> category : category_id
+       records -> benefit : benefit_id
        envelopes --> goals : goal_id
        envelopes --> category : category_id
+       budgetLedger --> category : category_id
+       budgetLedger -> records : records_id
 
     }
 
 }
-
-
+note right of SQLlite
+    data will be synchronised
+    with mobile application
+    using symmetricds
+end note
 class GUI{
 
     --
