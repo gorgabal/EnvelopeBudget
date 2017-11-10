@@ -59,8 +59,7 @@ interface DataInterface{
         object goals{
             int goal
             date deadline
-            bool goalByDate
-            bool goalPerMonth
+            int goal_type_id
         }
 
         object budgetLedger{
@@ -76,6 +75,11 @@ interface DataInterface{
             String name
         }
 
+        object goal_type{
+            int id
+            String name
+        }
+
         note right of records
         budgetsLedger total
         and records total
@@ -86,6 +90,7 @@ interface DataInterface{
        records --> category : category_id
        records -> benefit : benefit_id
        envelopes --> goals : goal_id
+       goals --> goal_type : goal_type_id
        envelopes --> category : category_id
        budgetLedger --> category : category_id
        budgetLedger -> records : records_id
