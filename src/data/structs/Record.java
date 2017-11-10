@@ -1,8 +1,8 @@
-package data;
+package data.structs;
 
 import java.util.Date;
 
-class Record {
+public class Record {
     public Date date;
     public int amount;
     public Account account;
