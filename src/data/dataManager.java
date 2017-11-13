@@ -65,6 +65,13 @@ public interface dataManager {
 
     Account getAccount(int id);
 
+    int toBeBudgetted(int year, int month);
+    int totalMoney();
+    int moneyLeftFromBudget();
+
+    String getTopAccount(int category_ID);
+    String getBottemAccount(int category_id);
+
     enum TYPE {
         INCOME, EXPENSE, ALL
     }
