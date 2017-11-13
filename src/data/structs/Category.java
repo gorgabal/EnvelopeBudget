@@ -2,7 +2,7 @@ package data.structs;
 
 public class Category {
     public int ID;
-    public String name;
+    public java.lang.String name;
     public String description;
     public boolean hidden;
 
@@ -12,4 +12,6 @@ public class Category {
         this.description = description;
         this.hidden = hidden;
     }
+
+    public Category(){};
 }

@@ -8,7 +8,15 @@ public class Goal {
     public Date deadline;
     GOAL_TYPE goaltype;
 
-    enum GOAL_TYPE {
+    public enum GOAL_TYPE {
         BY_DATE, PER_MONTH, REGULAR
     }
+
+    public Goal(int ID, Date deadline, GOAL_TYPE goaltype) {
+        this.ID = ID;
+        this.deadline = deadline;
+        this.goaltype = goaltype;
+    }
+
+    public Goal(){};
 }

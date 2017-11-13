@@ -45,8 +45,6 @@ public interface dataManager {
 
     int modifyCategory(Category cat);
 
-    Category getCategory(String query);
-
     Category getCategory(int ID);
 
     String[] getCategories();
@@ -67,7 +65,7 @@ public interface dataManager {
 
     int toBeBudgetted(int year, int month);
     int totalMoney();
-    int moneyLeftFromBudget();
+    int moneyLeftFromBudget(int BudgetID);
 
     String getTopAccount(int category_ID);
     String getBottemAccount(int category_id);
