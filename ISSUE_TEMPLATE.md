@@ -14,3 +14,14 @@ A duplicate of existing work may have been found!
 - [] goals per envelope
 
 <!-- end duplicate -->
+
+### Version
+
+**EnvelopBudget Version: [x.x.x]**
+**Java Version: [x.x.x]**
+
+### Description
+
+[Description of the issue]
+
+[Steps to reproduce the problem...]
