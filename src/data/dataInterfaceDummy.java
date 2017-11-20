@@ -4,12 +4,11 @@ import data.structs.*;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import static data.structs.Goal.GOAL_TYPE.*;
 
 
-public class dataManagerDummy implements dataManager {
+public class dataInterfaceDummy implements dataInterface {
 
     private Account dummyAccount;
     private Category dummyCategory;
@@ -17,7 +16,7 @@ public class dataManagerDummy implements dataManager {
     private Record dummyRecord;
     private Envelope dummyEnvelope;
 
-    public dataManagerDummy() {
+    public dataInterfaceDummy() {
         Calendar cal = Calendar.getInstance();
         dummyAccount = new Account(0 , "Main Bank Account", "This is a dummy account to demenstrate some UI elements");
         dummyCategory = new Category(0, "Rent","An catogory to be able to pay the rent!", false);

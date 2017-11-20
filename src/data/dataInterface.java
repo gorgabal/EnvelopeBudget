@@ -5,7 +5,7 @@ import data.structs.*;
 
 import java.util.Date;
 
-public interface dataManager {
+public interface dataInterface {
 
     /**
      * Records an transaction,
