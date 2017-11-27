@@ -1,7 +1,7 @@
 # EnvelopeBudget
 Desktop Application to manage your [budget envelopes](https://en.wikipedia.org/wiki/Personal_budget#Envelopes). 
 
-The first version is being worked on in branch develop. 
+NOTICE: this project has been transferred to [lil5's repo](https://github.com/lil5/EnvelopeBudgetMobile)
 
 # Goals
 
